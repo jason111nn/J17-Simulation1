@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickets</title>
+    <link rel="stylesheet" href="./bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./img/logo.png">
+    <style>
+    </style>
+</head>
+
+<body>
+    <nav>
+        <img src="./img/logo.png" alt="Logo">
+        <a href="./home.html">Home</a>
+        <a href="./business.html">Business</a>
+        <a href="./news.html">News</a>
+        <a href="./tickets.html">Tickets</a>
+    </nav>
+    <main>
+        <form method="post" onsubmit="Tickets(event)">
+            <input type="text" name="firstname" placeholder="First name" required>
+            <input type="text" name="lastname" placeholder="Last name" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="text" name="phone" placeholder="Phone" required>
+            <h4>由小到大排列</h4>
+            <div class="sortable-box"></div>
+            <div>
+                <button type="button" onclick="veri()">Reset</button>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <div>
+            <img onclick="location.href='https://google.com';" src="./img/google.png" alt="google">
+            <img onclick="location.href='https://facebook.com';" src="./img/facebook.png" alt="facebook">
+        </div>
+        <p>Copyright &copy; 2024 FIBEX All Rights Reserved</p>
+    </footer>
+    <script src="./jquery/jquery.js"></script>
+    <script src="./jquery/jquery-ui.min.js"></script>
+    <script src="./bootstrap/bootstrap.js"></script>
+    <script>
+        const sortable = $(".sortable-box");
+
+        $(document).ready(function () {
+            veri();
+            sortable.sortable({
+                items: ".sortable-item",
+                cursor: "move"
+            });
+        });
+
+        function veri() {
+            sortable.empty();
+            for (let i = 0; i < 4; i++) {
+                const veri = Math.floor(Math.random() * 90 + 10);
+                sortable.append(`<div class="sortable-item" data-index="${veri}">${veri}</div>`);
+            }
+        }
+        function Tickets(event) {
+            event.preventDefault();
+            const items = $(".sortable-item");
+            const numbers = items.map(function () {
+                return parseInt($(this).data("index"));
+            }).get();
+
+            if (numbers.every((val, i, arr) => i === 0 || arr[i - 1] <= val)) {
+                const form = $("form")[0];
+                const formData = new FormData(form);
+
+                fetch('./post.php', {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(response => response.text())
+                    .then(result => {
+                        alert(result);
+                        location.href = "./home.html";
+                    })
+            } else {
+                alert("驗證碼排列錯誤");
+            }
+        }
+    </script>
+</body>
+</html>
