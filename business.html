@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business</title>
+    <link rel="stylesheet" href="./bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./img/logo.png">
+</head>
+<body>
+    <nav>
+        <img src="./img/logo.png">
+        <a href="./home.html">Home</a>
+        <a href="./business.html">Business</a>
+        <a href="./news.html">News</a>
+        <a href="./tickets.html">Tickets</a>
+    </nav>
+    <main style="display: flex; align-items: center; justify-content: center;">
+        <div class="business">
+            <img src="./img/news2.jpg" class="news-img">
+            <div>
+                <h5 class="news-h5">設計展資訊區</h5>
+                <p class="news-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, soluta veritatis!</p>
+            </div>
+        </div>
+        <div class="business">
+            <img src="./img/news4.jpg" class="news-img" style="height: 400px;">
+            <div>
+                <h5 class="news-h5">作品介紹區</h5>
+                <p class="news-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus consequatur, temporibus eos <span class="readmore" style="display: none;">voluptate maxime recusandae veniam ea, eligendi harum illo nobis amet. Corporis earum eum asperiores modi ratione magnam debitis.</span></p>
+                <button class="read-btn btn btn-secondary">Read more</button>
+            </div>
+        </div> 
+    </main>
+    <footer>
+        <div>
+            <img onclick="location.href='https://google.com';" src="./img/google.png" alt="google">
+            <img onclick="location.href='https://facebook.com';" src="./img/facebook.png" alt="facebook">
+        </div>
+        <p>Copyright &copy; 2024 FIBEX All Rights Reserved</p>
+    </footer>
+</body>
+<script src="./jquery/jquery-ui.min.js"></script>
+<script src="./jquery/jquery.js"></script>
+<script src="./bootstrap/bootstrap.js"></script>
+<script>
+    $(".read-btn").click(()=>{
+        $(".readmore").slideToggle(200);
+        const btn = $(".read-btn")
+        btn.text(btn.text() === "Read more" ? "Read less" : "Read more")
+    })
+</script>
+</html>
